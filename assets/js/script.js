@@ -4,19 +4,18 @@ const setCurrentTime = () => {
 };
 
 const setTextAreaColours = () => {
-  const currentTime = moment().format("H");
+  const currentTimeString = moment().format("H");
+  const currentTimeNumber = parseInt(currentTimeString);
   const divContainer = $(".container");
   const allTextArea = divContainer.children().children("textarea");
   const setColour = (index) => {
-    const thisTime = allTextArea[index].dataset.time;
-    console.log(thisTime);
-    console.log(currentTime);
-    console.log(index);
-    if (thisTime < currentTime) {
+    const thisTimeString = allTextArea[index].dataset.time;
+    const thisTimeNumber = parseInt(thisTimeString);
+    if (thisTimeNumber < currentTimeNumber) {
       $(allTextArea[index]).addClass("past");
-    } else if (thisTime === currentTime) {
+    } else if (thisTimeNumber === currentTimeNumber) {
       $(allTextArea[index]).addClass("present");
-    } else if (thisTime > currentTime) {
+    } else if (thisTimeNumber > currentTimeNumber) {
       $(allTextArea[index]).addClass("future");
     }
   };
