@@ -1,6 +1,5 @@
 const divContainer = $(".container");
 const allTextArea = divContainer.children().children("textarea");
-const dayPlannerMemory = localStorage.getItem("dayPlanner");
 
 // function to print the current date into the header
 const setCurrentTime = () => {
@@ -28,6 +27,7 @@ const setTextAreaColours = () => {
 
 // initialize local memory if empty and set text content for each text area if not
 const initializeMemory = () => {
+  const dayPlannerMemory = localStorage.getItem("dayPlanner");
   if (dayPlannerMemory === null) {
     const dayPlanner = {
       9: {
@@ -71,6 +71,7 @@ const initializeMemory = () => {
 
 // on click of the save button upload textarea content into local memory
 const setTasksIntoMemory = (event) => {
+  const dayPlannerMemory = localStorage.getItem("dayPlanner");
   const dayPlannerObject = JSON.parse(dayPlannerMemory);
   const target = $(event.target);
   if (target[0].localName === "button") {
