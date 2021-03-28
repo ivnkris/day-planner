@@ -1,3 +1,7 @@
+const divContainer = $(".container");
+const allTextArea = divContainer.children().children("textarea");
+const dayPlannerMemory = localStorage.getItem("dayPlanner");
+
 // function to print the current date into the header
 const setCurrentTime = () => {
   const currentTime = moment().format("dddd, MMMM Do");
@@ -8,8 +12,6 @@ const setCurrentTime = () => {
 const setTextAreaColours = () => {
   const currentTimeString = moment().format("H");
   const currentTimeNumber = parseInt(currentTimeString);
-  const divContainer = $(".container");
-  const allTextArea = divContainer.children().children("textarea");
   const setColour = (index) => {
     const thisTimeString = allTextArea[index].dataset.time;
     const thisTimeNumber = parseInt(thisTimeString);
@@ -17,51 +19,42 @@ const setTextAreaColours = () => {
       $(allTextArea[index]).addClass("past");
     } else if (thisTimeNumber === currentTimeNumber) {
       $(allTextArea[index]).addClass("present");
-    } else if (thisTimeNumber > currentTimeNumber) {
+    } else {
       $(allTextArea[index]).addClass("future");
     }
   };
   allTextArea.each(setColour);
 };
 
+// initialize local memory if empty and set text content for each text area if not
 const initializeMemory = () => {
-  const dayPlannerMemory = localStorage.getItem("dayPlanner");
   if (dayPlannerMemory === null) {
     const dayPlanner = {
       9: {
-        hour: 9,
         task: "",
       },
       10: {
-        hour: 10,
         task: "",
       },
       11: {
-        hour: 11,
         task: "",
       },
       12: {
-        hour: 12,
         task: "",
       },
       13: {
-        hour: 13,
         task: "",
       },
       14: {
-        hour: 14,
         task: "",
       },
       15: {
-        hour: 15,
         task: "",
       },
       16: {
-        hour: 16,
         task: "",
       },
       17: {
-        hour: 17,
         task: "",
       },
     };
@@ -69,8 +62,6 @@ const initializeMemory = () => {
     localStorage.setItem("dayPlanner", dayPlannerString);
   } else {
     const dayPlanner = JSON.parse(dayPlannerMemory);
-    const divContainer = $(".container");
-    const allTextArea = divContainer.children().children("textarea");
     const setContent = (index) => {
       $(allTextArea[index]).text(dayPlanner[index + 9].task);
     };
@@ -78,8 +69,8 @@ const initializeMemory = () => {
   }
 };
 
+// on click of the save button upload textarea content into local memory
 const setTasksIntoMemory = (event) => {
-  const dayPlannerMemory = localStorage.getItem("dayPlanner");
   const dayPlannerObject = JSON.parse(dayPlannerMemory);
   const target = $(event.target);
   if (target[0].localName === "button") {
