@@ -67,10 +67,16 @@ const initializeMemory = () => {
     };
     const dayPlannerString = JSON.stringify(dayPlanner);
     localStorage.setItem("dayPlanner", dayPlannerString);
+  } else {
+    const dayPlanner = JSON.parse(dayPlannerMemory);
+    const divContainer = $(".container");
+    const allTextArea = divContainer.children().children("textarea");
+    const setContent = (index) => {
+      $(allTextArea[index]).text(dayPlanner[index + 9].task);
+    };
+    allTextArea.each(setContent);
   }
 };
-
-const getTasksFromMemory = () => {};
 
 const setTasksIntoMemory = (event) => {
   const dayPlannerMemory = localStorage.getItem("dayPlanner");
@@ -94,7 +100,6 @@ const setTasksIntoMemory = (event) => {
 $(document).ready(setCurrentTime);
 $(document).ready(setTextAreaColours);
 $(document).ready(initializeMemory);
-$(document).ready(getTasksFromMemory);
 $(".container").on("click", setTasksIntoMemory);
 
 // function to check the time every 10 seconds and reset textarea colours if needed
