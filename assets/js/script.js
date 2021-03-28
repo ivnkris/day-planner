@@ -73,8 +73,12 @@ const initializeMemory = () => {
 const setTasksIntoMemory = (event) => {
   const dayPlannerMemory = localStorage.getItem("dayPlanner");
   const dayPlannerObject = JSON.parse(dayPlannerMemory);
-  console.log(dayPlannerObject);
   const target = $(event.target);
+  const time = target.parent().children("textarea")[0].dataset.time;
+  const input = target.parent().children("textarea").val();
+  if (target[0].localName === "button") {
+    console.log("button");
+  }
 };
 
 // event listeners to invoke setCurrentTime() and setTextAreaColours() when DOM has rendered
