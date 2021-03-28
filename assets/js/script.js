@@ -24,18 +24,63 @@ const setTextAreaColours = () => {
   allTextArea.each(setColour);
 };
 
-const setTasksIntoMemory = () => {
-  console.log("click");
+const initializeMemory = () => {
+  const dayPlannerMemory = localStorage.getItem("dayPlanner");
+  if (dayPlannerMemory === null) {
+    const dayPlanner = {
+      9: {
+        hour: 9,
+        task: "",
+      },
+      10: {
+        hour: 10,
+        task: "",
+      },
+      11: {
+        hour: 11,
+        task: "",
+      },
+      12: {
+        hour: 12,
+        task: "",
+      },
+      13: {
+        hour: 13,
+        task: "",
+      },
+      14: {
+        hour: 14,
+        task: "",
+      },
+      15: {
+        hour: 15,
+        task: "",
+      },
+      16: {
+        hour: 16,
+        task: "",
+      },
+      17: {
+        hour: 17,
+        task: "",
+      },
+    };
+    const dayPlannerString = JSON.stringify(dayPlanner);
+    localStorage.setItem("dayPlanner", dayPlannerString);
+  }
 };
 
-const getTasksFromMemory = () => {
-  console.log("ready");
+const setTasksIntoMemory = (event) => {
+  const dayPlannerMemory = localStorage.getItem("dayPlanner");
+  const dayPlannerObject = JSON.parse(dayPlannerMemory);
+  console.log(dayPlannerObject);
+  const target = $(event.target);
 };
 
 // event listeners to invoke setCurrentTime() and setTextAreaColours() when DOM has rendered
 $(document).ready(setCurrentTime);
 $(document).ready(setTextAreaColours);
-$(document).ready(getTasksFromMemory);
+$(document).ready(initializeMemory);
 $(".container").on("click", setTasksIntoMemory);
 
 // function to check the time every 10 seconds and reset textarea colours if needed
