@@ -86,6 +86,8 @@ const setTasksIntoMemory = (event) => {
     const input = target.parent().parent().children("textarea").val();
     dayPlannerObject[time].task = input;
   }
+  const dayPlannerUpload = JSON.stringify(dayPlannerObject);
+  localStorage.setItem("dayPlanner", dayPlannerUpload);
 };
 
 // event listeners to invoke setCurrentTime() and setTextAreaColours() when DOM has rendered
