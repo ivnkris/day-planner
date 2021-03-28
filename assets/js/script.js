@@ -74,10 +74,20 @@ const setTasksIntoMemory = (event) => {
   const dayPlannerMemory = localStorage.getItem("dayPlanner");
   const dayPlannerObject = JSON.parse(dayPlannerMemory);
   const target = $(event.target);
-  const time = target.parent().children("textarea")[0].dataset.time;
-  const input = target.parent().children("textarea").val();
+  console.log(target);
   if (target[0].localName === "button") {
+    const time = target.parent().children("textarea")[0].dataset.time;
+    const input = target.parent().children("textarea").val();
     console.log("button");
+    console.log(time);
+    console.log(input);
+  }
+  if (target[0].localName === "i") {
+    const time = target.parent().parent().children("textarea")[0].dataset.time;
+    const input = target.parent().parent().children("textarea").val();
+    console.log("favicon");
+    console.log(time);
+    console.log(input);
   }
 };
 
