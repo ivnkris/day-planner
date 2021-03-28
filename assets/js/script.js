@@ -1,8 +1,10 @@
+// function to print the current date into the header
 const setCurrentTime = () => {
   const currentTime = moment().format("dddd, MMMM Do");
   $("#currentDay").text(currentTime);
 };
 
+// function to set the textarea colours based on the time
 const setTextAreaColours = () => {
   const currentTimeString = moment().format("H");
   const currentTimeNumber = parseInt(currentTimeString);
@@ -22,5 +24,9 @@ const setTextAreaColours = () => {
   allTextArea.each(setColour);
 };
 
+// event listeners to invoke setCurrentTime() and setTextAreaColours() when DOM has rendered
 $(document).ready(setCurrentTime);
 $(document).ready(setTextAreaColours);
+
+// function to check the time every 10 seconds and reset textarea colours if needed
+setInterval(setTextAreaColours, 10000);
